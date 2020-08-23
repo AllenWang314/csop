@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
 import Confirmation from "./pages/Confirmation.js";
 import Public from "./pages/Public.js"
 import MySpin from "./modules/MySpin";
