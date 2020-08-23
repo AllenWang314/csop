@@ -2,8 +2,7 @@ import React, { Component } from "react";
 
 import "./Pages.css";
 
-
-class Leaderboard extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
@@ -15,13 +14,13 @@ class Leaderboard extends Component {
   }
 
   render() {
-    console.log("Loaded leaderboard")
+    console.log("Loaded dashboard")
     return (
       <div className = "content-container">
-          This is the leaderboard page.
+          This is the dashboard page.
       </div>
     );
   }
 }
 
-export default Leaderboard;
+export default Dashboard;

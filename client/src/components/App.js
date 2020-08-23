@@ -1,16 +1,27 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import NotFound from "./pages/NotFound.js";
-import Confirmation from "./pages/Confirmation.js";
-import Public from "./pages/Public.js"
-import MySpin from "./modules/MySpin";
-
-import "../utilities.css";
-
-import { socket } from "../client-socket.js";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import Cookies from "universal-cookie";
+import {
+  Menu,
+  Header,
+  Responsive,
+} from "semantic-ui-react";
 
 import { get, post } from "../utilities";
-import Cookies from "universal-cookie";
+import { socket } from "../client-socket.js";
+import NotFound from "./pages/NotFound.js";
+import Confirmation from "./pages/Confirmation.js";
+import Login from "./pages/Login.js"
+import About from "./pages/About.js"
+import Splash from "./pages/Splash.js"
+import Leaderboard from "./pages/Leaderboard.js"
+import Dashboard from "./pages/Dashboard.js"
+
+
+
+import "../utilities.css";
+import "./App.css";
+
 const cookies = new Cookies();
 
 /**
@@ -22,7 +33,7 @@ class App extends Component {
     super(props);
     this.state = {
       userId: undefined,
-      tryingToLogin: true,
+      loaded: false // TODO: figure out a better way to handle loaded and rendering the login button
     };
     let self = this;
     if (cookies.get("token") != undefined && cookies.get("token").length > 0) {
@@ -35,8 +46,8 @@ class App extends Component {
       if (user._id && cookies.get("token") != undefined) {
         // they are registed in the database, and currently logged in.
         this.me();
-      } else if (!this.state.code) {
-        this.setState({ tryingToLogin: false });
+      } else {
+        this.setState({loaded: true})
       }
     });
     socket.on("reconnect_failed", () => {
@@ -72,7 +83,7 @@ class App extends Component {
   logout = () => {
     cookies.set("token", "", { path: "/" });
     post("/api/logout", {}).then((res) => {
-      this.setState({ userId: undefined, tryingToLogin: false }, () => {
+      this.setState({ userId: undefined }, () => {
         window.location.href = "/";
       });
     });
@@ -95,17 +106,11 @@ class App extends Component {
         email: res.user.email,
         visible: res.user.visible,
         allPages: res.allPages,
+        loaded: true,
       });
     });
   };
 
-  setVisible = (bool) => {
-    post("/api/setVisible", { visible: bool }).then((data) => {
-      if (data.setVisible) {
-        this.setState({ visible: bool });
-      }
-    });
-  };
   signup = (data) => {
     post("/api/signup", data).then((res) => {
       if (res.msg) {
@@ -114,44 +119,102 @@ class App extends Component {
     });
   };
 
-  handleLogout = () => {
-    this.setState({ userId: undefined });
-    post("/api/logout");
-  };
-
-  logState = () => {
-    console.log(this.state);
-  };
-
   render() {
-    if (!this.state.userId) {
-      if (this.state.tryingToLogin) return <MySpin />;
-      return (
-        <>
-          <button onClick={()=>{this.logState()}}>log state</button>
-          <Router>
-            <Switch>
-              <Confirmation path="/confirmation/:token"></Confirmation>
-              <Public
-                path="/"
-                visible={true}
-                login={this.login}
-                logout={this.logout}
-                me={this.me}
-                signup={this.signup}
-                loginMessage={this.state.loginMessage}
-                signUpMessage={this.state.signUpMessage}
-              />
-              <NotFound default />
-            </Switch>
-          </Router>
-        </>
-      );
-    }
-    return <>
-    <button onClick={()=>{this.logState()}}>log state</button>
-    <button onClick = {() => {this.logout()}}>Logout</button>
-    </>
+    console.log(this.state)
+    return (
+        <BrowserRouter>
+          <div>
+          <Menu className="nav-bar" borderless size="huge">
+            <div className="nav-section-container">
+              <div id="nav-left" className="nav-section">
+                <Menu.Item href="/dashboard" style={{ display: "inline-block" }}>
+                  Dashboard
+                  </Menu.Item>
+                <Menu.Item href="/leaderboard" style={{ display: "inline-block" }}>
+                  Leaderboard
+                  </Menu.Item>
+                <Menu.Item href="/about" style={{ display: "inline-block" }}>
+                  About
+                  </Menu.Item>
+              </div>
+              <div id="nav-middle" className="nav-section">
+                <Menu.Menu style={{ margin: "auto" }}>
+                  <Header href="/">CSOP</Header>
+                </Menu.Menu>
+              </div>
+              <div id="nav-right" className="nav-section">
+                <Menu.Menu>
+                  {(this.state.loaded) ? (this.state.userId ?
+                    <Menu.Item
+                      name={"Logout"}
+                      onClick={this.logout}
+                      style={{ display: "inline-block" }}
+                    /> :
+                    <Menu.Item href="/login" style={{ display: "inline-block" }}>
+                      Login
+                    </Menu.Item>) : null}
+                </Menu.Menu>
+              </div>
+            </div>
+          </Menu>
+          <Switch>
+            <Route
+              path="/confirmation/:token"
+              render={() => {
+                return <Confirmation {...props} />;
+              }}
+            />
+            <Route
+              exact
+              path="/about"
+              render={() => {
+                return <About />;
+              }}
+            />
+            <Route
+              exact
+              path="/leaderboard"
+              render={() => {
+                return <Leaderboard />;
+              }}
+            />
+            <Route
+              exact
+              path="/dashboard"
+              render={() => {
+                return <Dashboard />;
+              }}
+            />
+            <Route
+              exact
+              path="/login"
+              render={() => {
+                return <Login
+                  path="/"
+                  visible={true}
+                  login={this.login}
+                  logout={this.logout}
+                  me={this.me}
+                  signup={this.signup}
+                  loginMessage={this.state.loginMessage}
+                  signUpMessage={this.state.signUpMessage}
+                />;
+              }}
+            />
+            <Route
+              exact
+              path="/"
+              render={() => {
+                return <Splash />
+              }}
+            />
+            <Route path='*' exact={true} render={() => {
+              return <NotFound default />;
+            }} />
+          </Switch>
+          </div>
+        </BrowserRouter>
+    );
   }
 }
 

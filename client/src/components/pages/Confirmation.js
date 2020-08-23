@@ -3,6 +3,8 @@ import { get, post } from "../../utilities";
 import { Row, Col, Form, Input, Button, Checkbox } from "antd";
 import logo from "../../../dist/favicon.png";
 
+import "./Pages.css";
+
 class Confirmation extends Component {
   constructor(props) {
     super(props);

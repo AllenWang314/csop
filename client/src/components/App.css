@@ -1,0 +1,36 @@
+html, body {
+    height: 100%;
+  }
+  
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-size: 100%;
+}
+  
+.nav-section-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4fr 1fr 4fr;
+}
+
+#nav-middle {
+    justify-self: center;
+    align-self: center;
+}
+
+#nav-left {
+    justify-self: left;
+    align-self: center;
+}
+
+#nav-right {
+    justify-self: right;
+    align-self: center;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+}
