@@ -1,0 +1,63 @@
+.Content {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.MiniChips {
+}
+
+.Title {
+    font-family: Cairo;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    margin-top: 5px;
+    padding-bottom: 12px;
+
+    color: #000000;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.TagLine {
+    font-family: Cairo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 45px;
+    
+    color: #2F303A;
+    
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.Play {
+    font-family: 'Cairo', sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    color: white;
+
+    cursor: pointer;
+    background-color: var(--emphasis);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border: transparent;
+    border-radius: 10px;
+    padding: 12px 50px;
+}
+
+.Play:hover {
+    opacity: 0.8;
+}
+
+.BigChip {
+    position: absolute;
+    width: 395px;
+    height: 893px;
+    left: 1500px;
+    top: 90px;
+
+    transform: rotate(9.28deg);
+}
