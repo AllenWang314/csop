@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-
+import { NavLink } from 'react-router-dom';
 import "./Pages.css";
+import "./Splash.css";
+import miniChips from "./mini-chips.png";
+import bigChip from "./csop3d-32.png";
 
 class Splash extends Component {
   constructor(props) {
@@ -17,7 +20,15 @@ class Splash extends Component {
     console.log("Loaded splash")
     return (
       <div className = "content-container">
-        This is the splash page.
+        <div className="Content">
+          <img className="MiniChips" src={miniChips}/>
+          <h1 className="Title">Collegiate Series of Poker</h1>
+          <p className="TagLine">Climb the Ranks.</p>
+          <NavLink to="/dashboard">
+            <button className="Play">Play Now</button>
+          </NavLink>
+        </div>
+        <img className="BigChip" src={bigChip}/>
       </div>
     );
   }

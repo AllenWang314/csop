@@ -1,0 +1,56 @@
+.Logo {
+    cursor: pointer;
+}
+
+.NavBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary);
+    padding: 0px 10px;
+}
+
+nav {
+    width: 90%;
+    padding: 0;
+}
+
+.NavLinks {
+    list-style: none;
+    padding: 0px;
+}
+
+.NavLinks li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.DashboardLink, .AboutLink, .LeaderboardLink {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+}
+
+.DashboardLink:hover, .AboutLink:hover, .LeaderboardLink:hover {
+    color: var(--emphasis);
+    opacity: 0.8;
+}
+
+.Login {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+
+    cursor: pointer;
+    background-color: var(--emphasis);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border: transparent;
+    border-radius: 10px;
+    padding: 6px 25px;
+}
+
+.Login:hover {
+    opacity: 0.8;
+}

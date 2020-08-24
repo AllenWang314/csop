@@ -17,6 +17,8 @@ import Splash from "./pages/Splash.js"
 import Leaderboard from "./pages/Leaderboard.js"
 import Dashboard from "./pages/Dashboard.js"
 
+import NavBar from "./modules/NavBar/NavBar.js"
+
 
 
 import "../utilities.css";
@@ -124,94 +126,102 @@ class App extends Component {
     return (
         <BrowserRouter>
           <div>
-          <Menu className="nav-bar" borderless size="huge">
-            <div className="nav-section-container">
-              <div id="nav-left" className="nav-section">
-                <Menu.Item href="/dashboard" style={{ display: "inline-block" }}>
-                  Dashboard
-                  </Menu.Item>
-                <Menu.Item href="/leaderboard" style={{ display: "inline-block" }}>
-                  Leaderboard
-                  </Menu.Item>
-                <Menu.Item href="/about" style={{ display: "inline-block" }}>
-                  About
-                  </Menu.Item>
+            {/* <Menu className="nav-bar" borderless size="huge">
+              <div className="nav-section-container">
+                <div id="nav-left" className="nav-section">
+                  <Menu.Item href="/dashboard" style={{ display: "inline-block" }}>
+                    Dashboard
+                    </Menu.Item>
+                  <Menu.Item href="/leaderboard" style={{ display: "inline-block" }}>
+                    Leaderboard
+                    </Menu.Item>
+                  <Menu.Item href="/about" style={{ display: "inline-block" }}>
+                    About
+                    </Menu.Item>
+                </div>
+                <div id="nav-middle" className="nav-section">
+                  <Menu.Menu style={{ margin: "auto" }}>
+                    <Header href="/">CSOP</Header>
+                  </Menu.Menu>
+                </div>
+                <div id="nav-right" className="nav-section">
+                  <Menu.Menu>
+                    {(this.state.loaded) ? (this.state.userId ?
+                      <Menu.Item
+                        name={"Logout"}
+                        onClick={this.logout}
+                        style={{ display: "inline-block" }}
+                      /> :
+                      <Menu.Item href="/login" style={{ display: "inline-block" }}>
+                        Login
+                      </Menu.Item>) : null}
+                  </Menu.Menu>
+                </div>
               </div>
-              <div id="nav-middle" className="nav-section">
-                <Menu.Menu style={{ margin: "auto" }}>
-                  <Header href="/">CSOP</Header>
-                </Menu.Menu>
-              </div>
-              <div id="nav-right" className="nav-section">
-                <Menu.Menu>
-                  {(this.state.loaded) ? (this.state.userId ?
-                    <Menu.Item
-                      name={"Logout"}
-                      onClick={this.logout}
-                      style={{ display: "inline-block" }}
-                    /> :
-                    <Menu.Item href="/login" style={{ display: "inline-block" }}>
-                      Login
-                    </Menu.Item>) : null}
-                </Menu.Menu>
-              </div>
-            </div>
-          </Menu>
-          <Switch>
-            <Route
-              path="/confirmation/:token"
-              render={() => {
-                return <Confirmation {...props} />;
-              }}
-            />
-            <Route
-              exact
-              path="/about"
-              render={() => {
-                return <About />;
-              }}
-            />
-            <Route
-              exact
-              path="/leaderboard"
-              render={() => {
-                return <Leaderboard />;
-              }}
-            />
-            <Route
-              exact
-              path="/dashboard"
-              render={() => {
-                return <Dashboard />;
-              }}
-            />
-            <Route
-              exact
-              path="/login"
-              render={() => {
-                return <Login
-                  path="/"
-                  visible={true}
-                  login={this.login}
-                  logout={this.logout}
-                  me={this.me}
-                  signup={this.signup}
-                  loginMessage={this.state.loginMessage}
-                  signUpMessage={this.state.signUpMessage}
-                />;
-              }}
-            />
-            <Route
-              exact
-              path="/"
-              render={() => {
-                return <Splash />
-              }}
-            />
-            <Route path='*' exact={true} render={() => {
-              return <NotFound default />;
-            }} />
-          </Switch>
+            </Menu> */}
+            <NavBar />
+            <Switch>
+              <Route
+                path="/confirmation/:token"
+                render={() => {
+                  return <Confirmation {...props} />;
+                }}
+              />
+              <Route
+                exact
+                path="/about"
+                render={() => {
+                  return <About />;
+                }}
+              />
+              <Route
+                exact
+                path="/test"
+                render={() => {
+                  return <NavBar />;
+                }}
+              />
+              <Route
+                exact
+                path="/leaderboard"
+                render={() => {
+                  return <Leaderboard />;
+                }}
+              />
+              <Route
+                exact
+                path="/dashboard"
+                render={() => {
+                  return <Dashboard />;
+                }}
+              />
+              <Route
+                exact
+                path="/login"
+                render={() => {
+                  return <Login
+                    path="/"
+                    visible={true}
+                    login={this.login}
+                    logout={this.logout}
+                    me={this.me}
+                    signup={this.signup}
+                    loginMessage={this.state.loginMessage}
+                    signUpMessage={this.state.signUpMessage}
+                  />;
+                }}
+              />
+              <Route
+                exact
+                path="/"
+                render={() => {
+                  return <Splash />
+                }}
+              />
+              <Route path='*' exact={true} render={() => {
+                return <NotFound default />;
+              }} />
+            </Switch>
           </div>
         </BrowserRouter>
     );
