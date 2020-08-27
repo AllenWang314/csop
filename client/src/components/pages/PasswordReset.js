@@ -5,7 +5,7 @@ import logo from '../modules/NavBar/CSOP Logo.png';
 
 import "./Pages.css";
 
-class Confirmation extends Component {
+class PasswordReset extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
@@ -14,11 +14,21 @@ class Confirmation extends Component {
     this.state = {
       tok: tok,
       email: "",
+      pass1: "",
+      pass2: "",
     };
   }
 
   submitForm = () => {
-    post("/api/confirmation", { email: this.state.email, token: this.state.tok }).then((res) => {
+    if (this.state.pass1 !== this.state.pass2) {
+      this.setState({msg: "Your passwords don't match!"})
+      return
+    }
+    if (this.state.pass1.length < 6) {
+      this.setState({msg: "Your new password is too short!"})
+      return
+    }
+    post("/api/resetPassword", { email: this.state.email, token: this.state.tok ,password: this.state.pass1}).then((res) => {
       if (res.msg) {
         this.setState({ msg: res.msg })
       }
@@ -47,13 +57,34 @@ class Confirmation extends Component {
             />
             <br />
             <br />
-            <h2 style={{ textAlign: "center" }}>One more step! Enter your email and hit confirm</h2>
+            <h2 style={{ textAlign: "center" }}>Reset your password</h2>
             <Input
               value={this.state.email}
               onChange={(e) => {
                 this.setState({ email: e.target.value });
               }}
               style={{ width: "20%", textAlign: "center" }}
+              placeholder="email"
+            ></Input>
+            <br />
+            <Input
+              value={this.state.pass1}
+              onChange={(e) => {
+                this.setState({ pass1: e.target.value });
+              }}
+              style={{ width: "20%", textAlign: "center" }}
+              placeholder="new password"
+              type='password'
+            ></Input>
+            <br />
+            <Input
+              value={this.state.pass2}
+              onChange={(e) => {
+                this.setState({ pass2: e.target.value });
+              }}
+              style={{ width: "20%", textAlign: "center" }}
+              placeholder="re-enter password"
+              type='password'
             ></Input>
             <br />
             <Button onClick={this.submitForm}>Confirm</Button>
@@ -66,4 +97,4 @@ class Confirmation extends Component {
   }
 }
 
-export default Confirmation;
+export default PasswordReset;

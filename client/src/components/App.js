@@ -16,8 +16,10 @@ import About from "./pages/About.js"
 import Splash from "./pages/Splash.js"
 import Leaderboard from "./pages/Leaderboard.js"
 import Dashboard from "./pages/Dashboard.js"
-
+import Signup from "./pages/Signup.js"
 import NavBar from "./modules/NavBar/NavBar.js"
+import PasswordReset from "./pages/PasswordReset.js"
+import PasswordEmail from "./pages/PasswordEmail.js"
 
 
 
@@ -161,46 +163,35 @@ class App extends Component {
             </Menu> */}
             <NavBar />
             <Switch>
+              <Confirmation path ="/confirmation/:token"></Confirmation>
               <Route
-                path="/confirmation/:token"
-                render={() => {
-                  return <Confirmation {...props} />;
-                }}
-              />
-              <Route
-                exact
-                path="/about"
+                exact path="/about"
                 render={() => {
                   return <About />;
                 }}
               />
               <Route
-                exact
-                path="/test"
+                exact path="/test"
                 render={() => {
                   return <NavBar />;
                 }}
               />
               <Route
-                exact
-                path="/leaderboard"
+                exact path="/leaderboard"
                 render={() => {
                   return <Leaderboard />;
                 }}
               />
               <Route
-                exact
-                path="/dashboard"
+                exact path="/dashboard"
                 render={() => {
                   return <Dashboard />;
                 }}
               />
               <Route
-                exact
-                path="/login"
+                exact path="/login"
                 render={() => {
                   return <Login
-                    path="/"
                     visible={true}
                     login={this.login}
                     logout={this.logout}
@@ -212,8 +203,23 @@ class App extends Component {
                 }}
               />
               <Route
-                exact
-                path="/"
+                exact path="/signup"
+                render={() => {
+                  return <Signup
+                    visible={true}
+                    login={this.login}
+                    logout={this.logout}
+                    me={this.me}
+                    signup={this.signup}
+                    loginMessage={this.state.loginMessage}
+                    signUpMessage={this.state.signUpMessage}
+                  />;
+                }}
+              />
+              <PasswordEmail path ="/passwordemail"></PasswordEmail>
+              <PasswordReset path ="/passwordreset/:token"></PasswordReset>
+              <Route
+                exact path="/"
                 render={() => {
                   return <Splash />
                 }}

@@ -7,7 +7,13 @@ const Lounge = require("./models/lounge");
 const Message = require("./models/message");
 const Page = require("./models/page");
 const School = require("./models/school");
+const Resume = require("./models/resume");
 const socket = require("./server-socket");
+
+const path = require("path");
+const mongoose = require("mongoose");
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
 var crypto = require("crypto");
 var nodemailer = require("nodemailer");
 const Token = require("./models/token");
@@ -71,6 +77,8 @@ async function signUp(req, res) {
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
+  const college = req.body.college;
+  const resume = req.body.resume;
 
   try {
     let user = await User.findOne({
@@ -81,12 +89,11 @@ async function signUp(req, res) {
         msg: "User Already Exists",
       });
     }
-    let schoolEmail = encodeURI(email.split("@")[1].replace(/ /g, "_"));
-    let school = await School.findOne({ email: schoolEmail });
     user = new User({
       name: name,
       email: email,
-      schoolId: school ? school._id : "None",
+      college: college,
+      resumeLink: resume,
     });
 
     const salt = await bcrypt.genSalt(10);
@@ -139,7 +146,7 @@ async function signUp(req, res) {
       });
     });
     res.status(200).send({
-      type: "succes",
+      type: "success",
       msg:
         "A verification email has been sent to " +
         user.email +
@@ -153,14 +160,12 @@ async function signUp(req, res) {
 
 function confirmationPost(req, res, next) {
   // Check for validation errors
-  console.log("1");
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
       errors: errors.array(),
     });
   }
-  console.log("2");
   // Find a matching token
   Token.findOne({ token: req.body.token }, function (err, token) {
     if (!token)
@@ -168,7 +173,6 @@ function confirmationPost(req, res, next) {
         type: "not-verified",
         msg: "We were unable to find a valid token. Your token my have expired.",
       });
-    console.log("3");
     // If we found a token, find a matching user
     User.findOne({ _id: token._userId, email: req.body.email }, function (err, user) {
       if (!user)
@@ -194,6 +198,7 @@ function confirmationPost(req, res, next) {
 
 function resendTokenPost(req, res, next) {
   // Check for validation errors
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
@@ -223,11 +228,13 @@ function resendTokenPost(req, res, next) {
       //     if (err) { return res.status(500).send({ msg: err.message }); }
       //     res.status(200).send('A verification email has been sent to ' + user.email + '.');
       // });
-
       try {
         console.log("sending");
+        console.log(req.headers.host)
+        console.log(token.token)
+        console.log(process.env.SENDGRID_USERNAME)
         const msg = {
-          to: email,
+          to: req.body.email,
           from: process.env.SENDGRID_USERNAME,
           subject: "Account Verification Token",
           text:
@@ -236,16 +243,26 @@ function resendTokenPost(req, res, next) {
             req.headers.host +
             "/confirmation/" +
             token.token +
-            ".\n",
+            "\n",
         };
+        
         sgMail.send(msg).catch((err) => {
           console.log(err);
         });
         console.log("sent");
       } catch (err) {
+        console.log(1)
         return res.status(500).send({ msg: err.message });
       }
     });
+  });
+  console.log(2)
+  res.status(200).send({
+    type: "success",
+    msg:
+      "A verification email has been sent to " +
+      req.body.email +
+      ". Please check your spam and/or promotions.",
   });
 }
 
@@ -278,7 +295,7 @@ async function login(req, res) {
 
     if (!user.isVerified)
       return res.status(200).json({
-        msg: "Email not verified !",
+        msg: "Email not verified!",
       });
 
     req.session.user = user;
@@ -401,6 +418,104 @@ async function signUpLogin(req, res) {
   }
 }
 
+async function passwordResetEmail(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array(),
+    });
+  }
+
+
+  User.findOne({ email: req.body.email }, function (err, user) {
+    if (!user)
+      return res.status(200).send({ msg: "We were unable to find a user with that email." });
+
+    // Create a verification token, save it, and send email
+    var token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString("hex") });
+
+    // Save the token
+    token.save(function (err) {
+      if (err) {
+        return res.status(500).send({ msg: err.message });
+      }
+
+      // Send the email
+      // var transporter = nodemailer.createTransport({ service: 'Sendgrid', auth: { user: process.env.SENDGRID_USERNAME, pass: process.env.SENDGRID_PASSWORD } });
+      // var mailOptions = { from: 'no-reply@codemoto.io', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
+      // transporter.sendMail(mailOptions, function (err) {
+      //     if (err) { return res.status(500).send({ msg: err.message }); }
+      //     res.status(200).send('A verification email has been sent to ' + user.email + '.');
+      // });
+      try {
+        console.log(req.body.email)
+        const msg = {
+          to: req.body.email,
+          from: process.env.SENDGRID_USERNAME,
+          subject: "CSOP Password Reset",
+          text:
+            "Hello,\n\n" +
+            "Please reset your password by clicking the link: \nhttp://" +
+            req.headers.host +
+            "/passwordreset/" +
+            token.token +
+            "\n",
+        };
+        
+        sgMail.send(msg).catch((err) => {
+          console.log(err);
+        });
+        console.log("sent");
+      } catch (err) {
+        console.log(1)
+        return res.status(500).send({ msg: err.message });
+      }
+    });
+  });
+  res.status(200).send({
+    type: "success",
+    msg:
+      "An email has been sent to " +
+      req.body.email +
+      ". Please check your spam and/or promotions.",
+  });
+}
+
+async function resetPassword(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array(),
+    });
+  }
+  // Find a matching token
+  Token.findOne({ token: req.body.token }, function (err, token) {
+    if (!token)
+      return res.status(200).send({
+        type: "not-verified",
+        msg: "We were unable to find a valid token. Your token my have expired.",
+      });
+    // If we found a token, find a matching user
+    User.findOne({ _id: token._userId, email: req.body.email }, async function (err, user) {
+      if (!user)
+        return res.status(200).send({ msg: "We were unable to find a user for this token." });
+      
+      // Verify and save the user
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(req.body.password, salt);
+      await user.save(function (err) {
+        if (err) {
+          return res.status(500).send({ msg: err.message });
+        }
+        res
+          .status(200)
+          .send({ type: "success", msg: "Your password has been reset. Please log in." });
+      });
+    });
+  });
+}
+
+
 module.exports = {
   login,
   logout,
@@ -411,4 +526,6 @@ module.exports = {
   confirmationPost,
   resendTokenPost,
   signUpLogin,
+  passwordResetEmail,
+  resetPassword,
 };

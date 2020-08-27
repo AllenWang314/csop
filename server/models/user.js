@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   name: String,
-  schoolId: String,
+  // username: String,
+  college: String,
   email: { type: String, unique: true },
   password: String,
   passwordResetToken: String,
@@ -11,22 +12,7 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  pageIds: {
-    type: [String],
-    default: [],
-  },
-  visible: {
-    type: Boolean,
-    default: true,
-  },
-  isSiteAdmin: {
-    type: Boolean,
-    default: false,
-  },
-  loungeId: {
-    type: String, // blank indicates not in lounge
-    default: "",
-  },
+  resumeLink: String,
 });
 
 // compile model from schema

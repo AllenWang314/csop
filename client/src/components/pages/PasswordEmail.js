@@ -5,7 +5,7 @@ import logo from '../modules/NavBar/CSOP Logo.png';
 
 import "./Pages.css";
 
-class Confirmation extends Component {
+class PasswordEmail extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
@@ -18,7 +18,7 @@ class Confirmation extends Component {
   }
 
   submitForm = () => {
-    post("/api/confirmation", { email: this.state.email, token: this.state.tok }).then((res) => {
+    post("/api/passwordEmail", { email: this.state.email }).then((res) => {
       if (res.msg) {
         this.setState({ msg: res.msg })
       }
@@ -47,7 +47,7 @@ class Confirmation extends Component {
             />
             <br />
             <br />
-            <h2 style={{ textAlign: "center" }}>One more step! Enter your email and hit confirm</h2>
+            <h2 style={{ textAlign: "center" }}>Enter your email and we'll send you a link to reset your password!</h2>
             <Input
               value={this.state.email}
               onChange={(e) => {
@@ -66,4 +66,4 @@ class Confirmation extends Component {
   }
 }
 
-export default Confirmation;
+export default PasswordEmail;
