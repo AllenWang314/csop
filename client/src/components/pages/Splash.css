@@ -52,12 +52,27 @@
     opacity: 0.8;
 }
 
+.LeftChipLight {
+    position: absolute;
+    left: 0px;
+    top: 40%;
+}
+
+.LeftChipDark {
+    position: absolute;
+    left: 155px;
+    top: 65%;
+    z-index: 1;
+}
+
 .BigChip {
     position: absolute;
-    width: 395px;
-    height: 893px;
-    left: 1500px;
-    top: 90px;
+    width: 20%;
+    height: 95%;
+    left: 78%;
+    top: 6%;
 
-    transform: rotate(9.28deg);
+    transform: rotate(15deg);
 }
+
+
