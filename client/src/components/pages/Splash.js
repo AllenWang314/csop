@@ -34,6 +34,24 @@ class Splash extends Component {
         <img className="LeftChipLight" src={leftChip}/>
         <img className="LeftChipDark" src={leftChipDark}/>
         <img className="BigChip" src={bigChip}/>
+
+        <div className="PageTwo">
+          <div className="PageTwoContainer">
+            <div className="Welcome">
+              <h1 className="WelcomeCSOP">WELCOME TO CSOP!</h1>
+              <p>We create a collegiate scene for poker just like any other sport. College students nation-wide can climb the ranks every season and be invited to a National Finals Tournament, where they can compete for the ultimate title!</p>
+              <p>Do you have what it takes?</p>
+            </div>
+            <div className="Season">
+              <img className="Trophy" src={trophy}/>
+              <p>Season 1</p>
+              <p>Fall 2020 - Spring 2021</p>
+            </div>
+            <NavLink to="/about">
+              <button className="Info">More Info</button>
+            </NavLink>
+          </div>
+        </div>
       </div>
     );
   }
