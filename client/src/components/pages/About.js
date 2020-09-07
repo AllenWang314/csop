@@ -18,6 +18,12 @@ class About extends Component {
     console.log("Loaded about")
     return (
       <div className="content-container">
+        <div className="Content">
+          <h1 className="Title">Leaderboard</h1>
+          <div className="placeholder">
+            Coming soon!
+          </div>
+        </div>
         <div id="faq-container">
           <h1>FAQ</h1>
           <div>

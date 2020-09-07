@@ -17,8 +17,13 @@ class Leaderboard extends Component {
   render() {
     console.log("Loaded leaderboard")
     return (
-      <div className = "content-container">
-          This is the leaderboard page.
+      <div className="content-container">
+        <div className="Content">
+          <h1 className="Title">Leaderboard</h1>
+          <div className="placeholder">
+            Coming soon!
+          </div>
+        </div>
       </div>
     );
   }

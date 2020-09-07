@@ -128,39 +128,6 @@ class App extends Component {
     return (
         <BrowserRouter>
           <div>
-            {/* <Menu className="nav-bar" borderless size="huge">
-              <div className="nav-section-container">
-                <div id="nav-left" className="nav-section">
-                  <Menu.Item href="/dashboard" style={{ display: "inline-block" }}>
-                    Dashboard
-                    </Menu.Item>
-                  <Menu.Item href="/leaderboard" style={{ display: "inline-block" }}>
-                    Leaderboard
-                    </Menu.Item>
-                  <Menu.Item href="/about" style={{ display: "inline-block" }}>
-                    About
-                    </Menu.Item>
-                </div>
-                <div id="nav-middle" className="nav-section">
-                  <Menu.Menu style={{ margin: "auto" }}>
-                    <Header href="/">CSOP</Header>
-                  </Menu.Menu>
-                </div>
-                <div id="nav-right" className="nav-section">
-                  <Menu.Menu>
-                    {(this.state.loaded) ? (this.state.userId ?
-                      <Menu.Item
-                        name={"Logout"}
-                        onClick={this.logout}
-                        style={{ display: "inline-block" }}
-                      /> :
-                      <Menu.Item href="/login" style={{ display: "inline-block" }}>
-                        Login
-                      </Menu.Item>) : null}
-                  </Menu.Menu>
-                </div>
-              </div>
-            </Menu> */}
             <NavBar />
             <Switch>
               <Confirmation path ="/confirmation/:token"></Confirmation>
