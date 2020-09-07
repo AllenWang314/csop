@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound.js";
 import Confirmation from "./pages/Confirmation.js";
 import Login from "./pages/Login.js"
 import About from "./pages/About.js"
+import Contact from "./pages/Contact.js"
 import Splash from "./pages/Splash.js"
 import Leaderboard from "./pages/Leaderboard.js"
 import Dashboard from "./pages/Dashboard.js"
@@ -141,6 +142,12 @@ class App extends Component {
                 exact path="/test"
                 render={() => {
                   return <NavBar />;
+                }}
+              />
+              <Route
+                exact path="/contact"
+                render={() => {
+                  return <Contact />;
                 }}
               />
               <Route
