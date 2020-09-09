@@ -14,8 +14,9 @@ class NavBar extends React.Component {
                 <nav>
                     <ul className="NavLinks">
                         <li><NavLink to="/dashboard" className="DashboardLink"> Dashboard </NavLink></li>
-                        <li><NavLink to="/about" className="AboutLink"> About </NavLink></li>
                         <li><NavLink to="/leaderboard" className="LeaderboardLink"> Leaderboard </NavLink></li>
+                        <li><NavLink to="/about" className="AboutLink"> About </NavLink></li>
+                        <li><NavLink to="/contact" className="AboutLink"> Contact </NavLink></li>
                     </ul>
                 </nav>
                 <NavLink to="/login" className="Login"> Login </NavLink>
