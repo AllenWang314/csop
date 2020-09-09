@@ -30,8 +30,8 @@ export default function Signup(props) {
   return (
     <div style={{ width: "100%", height: "100vh" }}>
       <div>
-        <Row >
-        <Col span={12} style = {{
+        <div >
+        <div span={12} style = {{
               display: "flex",
               overflow: "hidden",
               alignItems: "center",
@@ -171,14 +171,9 @@ export default function Signup(props) {
               <Form.Item>{props.signUpMessage}</Form.Item>
             </Form>
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-
-
-
-
-

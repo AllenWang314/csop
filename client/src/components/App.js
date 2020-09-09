@@ -134,7 +134,7 @@ class App extends Component {
               <Route
                 exact path="/about"
                 render={() => {
-                  return <About />;
+                  return <About loggedIn={this.state.userId}/>;
                 }}
               />
               <Route
