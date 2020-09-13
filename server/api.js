@@ -16,6 +16,7 @@ const User = require("./models/user");
 
 // import authentication library
 const auth = require("./auth");
+const queue = require("./queue");
 
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
@@ -98,6 +99,7 @@ router.post("/upload", (req,res) => {
   }
 });
 })
+
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
   if (req.user) {
@@ -109,6 +111,10 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
+
+router.post("/queue", auth.ensureLoggedIn, queue.queue);
+router.post("/dequeue", auth.ensureLoggedIn, queue.dequeue);
+router.post("/game", auth.ensureLoggedIn, queue.getGame);
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

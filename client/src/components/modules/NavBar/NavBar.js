@@ -5,6 +5,11 @@ import logo from './CSOP Logo.png';
 
 
 class NavBar extends React.Component {
+    constructor(props) {
+        super(props);
+        // Initialize Default State
+        this.state = {};
+      }
     render() {
         return (
             <div className="NavBar">
@@ -19,7 +24,7 @@ class NavBar extends React.Component {
                         <li><NavLink to="/contact" className="AboutLink"> Contact </NavLink></li>
                     </ul>
                 </nav>
-                <NavLink to="/login" className="Login"> Login </NavLink>
+                {this.props.userId ?  <NavLink to="/" onClick = {this.props.logout} className="Login"> Logout </NavLink> : <NavLink to="/login" className="Login"> Login </NavLink>}
             </div>
         );
     }

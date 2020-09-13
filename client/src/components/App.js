@@ -129,7 +129,7 @@ class App extends Component {
     return (
         <BrowserRouter>
           <div>
-            <NavBar />
+            <NavBar userId = {this.state.userId} logout = {this.logout}/>
             <Switch>
               <Confirmation path ="/confirmation/:token"></Confirmation>
               <Route

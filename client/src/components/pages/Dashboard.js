@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Pages.css";
 import "./Splash.css";
+import { post } from "../../utilities";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -11,6 +12,21 @@ class Dashboard extends Component {
 
   componentDidMount() {
     // remember -- api calls go here!
+    post("/api/getGame").then((data)=>{
+      this.setState({game: data.game})
+    })
+  }
+
+  queue = () => {
+    post("/api/queue", {}).then((data)=> {
+      this.setState({game: data.game})
+    })
+  }
+
+  dequeue = () => {
+    post("/api/dequeue", {gameId: this.state.game._id}).then((data)=> {
+      this.setState({game: undefined})
+    })
   }
 
   render() {
@@ -22,6 +38,10 @@ class Dashboard extends Component {
           <div className="placeholder">
             Coming soon!
           </div>
+          <button onClick = {()=>{console.log(this.state)}}>logstate</button>
+          {this.state.game && this.state.game.status === "inQueue" ? <button onClick = {this.dequeue}>Remove Queue</button> :
+          (this.state.game && this.state.game.status === "inGame" ? <div>In Game</div> :
+          <button onClick = {this.queue}>Queue</button>)}
         </div>
       </div>
     );
