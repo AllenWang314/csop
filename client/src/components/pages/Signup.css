@@ -1,0 +1,15 @@
+.Title {
+    line-height: 80px;
+}
+
+.Subtitle {
+    margin-bottom: 4px;
+}
+
+.InputInfo {
+    margin-bottom: 0;
+}
+
+.SubmitButton {
+    margin-top: 24px;
+}

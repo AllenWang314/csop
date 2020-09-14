@@ -7,7 +7,9 @@ import { List, Space, Modal, Row, Col, Button, Form, Input, DatePicker, Checkbox
 import { CalendarOutlined, TeamOutlined, BookOutlined } from "@ant-design/icons";
 
 import "../../utilities.css";
-import logo from "../modules/NavBar/CSOP Logo.png";
+import "./Signup.css";
+import "./Login.css";
+import logo from './CSOP Logo big.png';
 
 
 
@@ -28,50 +30,19 @@ export default function Signup(props) {
     });
   };
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
+    <div>
       <div>
-        <div >
-        <div span={12} style = {{
-              display: "flex",
-              overflow: "hidden",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "row",
-              color: "white",
-              }}>
-          <div
-            style={{
-              width: "100%",
-              height: "100vh",
-              backgroundColor: "#041528",
-              display: "flex",
-              overflow: "hidden",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              color: "white",
-            }}
-          >
-        <img src = {logo} width = {"400px"}></img>
-
+        <div>
+        <div span={12} className="Col">
+          <div className="Left">
+            <img src = {logo} width = {"400px"}></img>
           </div>
-          <div
-            style={{
-              width: "100%",
-              height: "100vh",
-              overflow: "hidden",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              backgroundColor: "white",
-              color:"black",
-            }}
-          >
-            <div>Make an Account</div>
-            <div>Who are you?</div>
-            <Form form={formSignup} name={"Signup"} onFinish={onFinishSignup}>
+          <div className="Right">
+            <div className="Title">Make an Account</div>
+            <div className="Subtitle">Who are you?</div>
+            <Form className="MainForm" form={formSignup} name={"Signup"} onFinish={onFinishSignup}>
               <Form.Item
+                className="InputTitle"
                 name="signupEmail"
                 label="School Email"
                 rules={[
@@ -82,9 +53,10 @@ export default function Signup(props) {
                   },
                 ]}
               >
-                <Input placeholder={"email@college.edu"} />
+                <Input className="InputInfo" placeholder={"email@college.edu"} />
               </Form.Item>
               <Form.Item
+                className="InputTitle"
                 name="signupName"
                 label="Full Name"
                 rules={[
@@ -94,9 +66,10 @@ export default function Signup(props) {
                   },
                 ]}
               >
-                <Input placeholder={"First Last"} />
+                <Input className="InputInfo" placeholder={"First Last"} />
               </Form.Item>
               <Form.Item
+                className="InputTitle"
                 name="signupCollege"
                 label="College"
                 rules={[
@@ -106,9 +79,10 @@ export default function Signup(props) {
                   },
                 ]}
               >
-                <Input placeholder={"College/University"} />
+                <Input className="InputInfo" placeholder={"College/University"} />
               </Form.Item>
               <Form.Item
+                className="InputTitle"
                 name="signupResumeLink"
                 label="Link to Resume"
                 rules={[
@@ -118,9 +92,10 @@ export default function Signup(props) {
                   },
                 ]}
               >
-                <Input placeholder={"Link to Resume"} />
+                <Input className="InputInfo" placeholder={"Link to Resume"} />
               </Form.Item>
               <Form.Item
+                className="InputTitle"
                 name="signupPassword"
                 label="Password"
                 rules={[
@@ -138,9 +113,10 @@ export default function Signup(props) {
                   }),
                 ]}
               >
-                <Input.Password placeholder={"Password"} />
+                <Input.Password className="InputInfo" placeholder={"Password"} />
               </Form.Item>
               <Form.Item
+                className="InputTitle"
                 name="signupPassword2"
                 label="Confirm Password"
                 rules={[
@@ -158,12 +134,12 @@ export default function Signup(props) {
                   }),
                 ]}
               >
-                <Input.Password placeholder={"Re-enter Password"} />
+                <Input.Password className="InputInfo" placeholder={"Re-enter Password"} />
               </Form.Item>
               {/* <input type="file" id="input"/> */}
 
               <Form.Item>
-                <Button key="submit" type="primary" htmlType="submit">
+                <Button className="SubmitButton" key="submit" type="primary" htmlType="submit">
                   Signup
               </Button>
               </Form.Item>
