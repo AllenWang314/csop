@@ -129,7 +129,7 @@ class App extends Component {
     return (
         <BrowserRouter>
           <div>
-            {window.location.href.indexOf("/login") >=0 || window.location.href.indexOf("/signup") >= 0 ? <></> : <NavBar userId = {this.state.userId} login = {this.login}></NavBar>}
+            {window.location.href.indexOf("/login") >=0 || window.location.href.indexOf("/signup") >= 0 ? <></> : <NavBar userId = {this.state.userId} logout = {this.logout}></NavBar>}
             <Switch>
               <Confirmation path ="/confirmation/:token"></Confirmation>
               <Route
