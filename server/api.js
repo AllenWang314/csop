@@ -45,7 +45,7 @@ router.get("/me", auth.me, async (req, res) => {
     // request.user is getting fetched from Middleware after token authentication
     console.log("backend requser" + req.user);
     const user = await User.findById(req.user.id);
-
+    req.session.user = user
     res.send({
       user: user,
     });
@@ -114,7 +114,7 @@ router.post("/initsocket", (req, res) => {
 
 router.post("/queue", auth.ensureLoggedIn, queue.queue);
 router.post("/dequeue", auth.ensureLoggedIn, queue.dequeue);
-router.post("/game", auth.ensureLoggedIn, queue.getGame);
+router.post("/getGame", auth.ensureLoggedIn, queue.getGame);
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

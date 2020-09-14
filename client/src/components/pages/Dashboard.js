@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Pages.css";
 import "./Splash.css";
 import { post } from "../../utilities";
+import { socket } from "../../client-socket.js";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -14,6 +15,22 @@ class Dashboard extends Component {
     // remember -- api calls go here!
     post("/api/getGame").then((data)=>{
       this.setState({game: data.game})
+    })
+    
+    socket.on("userQueued", (data) => {
+      this.setState({game: data.game})
+    })
+
+    socket.on("userLeft", (data) => {
+      this.setState({game: data.game})
+    })
+
+    socket.on("gameStart", (data) => {
+      this.setState({game: data.game})
+    })
+
+    socket.on("disconnect", (data) => {
+      this.dequeue()
     })
   }
 

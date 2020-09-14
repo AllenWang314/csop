@@ -17,7 +17,8 @@ const multer = require("multer");
 const game = require("./models/game");
 
 async function queue(req,res) {
-    Game.findOne({status: "queue"}).then((game) => {
+    console.log(req.user._id)
+    Game.findOne({status: "inQueue"}).then((game) => {
         if(!game) {
             let newGame = new Game({
                 timestamp: Date.now(),
@@ -46,7 +47,10 @@ async function queue(req,res) {
                     user.gameId = game._id
                     user.save().then(()=> {
                         socket.getSocketFromUserID(req.user._id).to("Game: " + game._id).emit("userQueued", {game: game, user:req.user})
-                        socket.getSocketFromUserID(req.user._id).join("Game: " + game._id);
+                        if(game.status === "inGame") {
+                            socket.getSocketFromUserID(req.user._id).to("Game: " + game._id).emit("gameStart", {game: game})
+                        }
+                        socket.getSocketFromUserID(req.user._id).join("Game: " + game._id)
                         res.send({game:game})
                     })
                 })
@@ -57,13 +61,18 @@ async function queue(req,res) {
 
 async function dequeue(req,res) {
     Game.findById(req.body.gameId).then((game)=> {
-        socket.getSocketFromUserID(req.user._id).leave("Game: " + game._id);
-        socket.getSocketFromUserID(req.user._id).to("Game: " + game._id).emit("userLeft", {game: game, user:req.user})
         game.userIds = game.userIds.filter((userId) => {
             return userId !== req.user._id
         })
         game.save().then(()=> {
-            res.send({game:game})
+            User.findById(req.user._id).then((user)=> {
+                user.gameId = ""
+                user.save().then(()=> {
+                    socket.getSocketFromUserID(req.user._id).leave("Game: " + game._id);
+                    socket.getSocketFromUserID(req.user._id).to("Game: " + game._id).emit("userLeft", {game: game, user:req.user})
+                    res.send({game:game})
+                })
+            })
         })
     })
 }
