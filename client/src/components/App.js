@@ -55,6 +55,11 @@ class App extends Component {
         this.setState({loaded: true})
       }
     });
+
+    post("/api/leaderboard", {}).then((data) => {
+      this.setState({leaderboard: data.leaderboard})
+    })
+    
     socket.on("reconnect_failed", () => {
       this.setState({ disconnect: true });
     });
@@ -75,7 +80,9 @@ class App extends Component {
         this.setState({ loginMessage: "Success!" });
       }
       post("/api/initsocket", { socketid: socket.id }).then((data) => {
-        if (data.init) this.me();
+        if (data.init) {
+          this.me()
+        }
         else {
           this.setState({
             disconnect: true,
@@ -129,7 +136,8 @@ class App extends Component {
     return (
         <BrowserRouter>
           <div>
-            {window.location.href.indexOf("/login") >=0 || window.location.href.indexOf("/signup") >= 0 ? <></> : <NavBar userId = {this.state.userId} logout = {this.logout}></NavBar>}
+            {/* {window.location.href.indexOf("/login") >=0 || window.location.href.indexOf("/signup") >= 0 ? <></> : <NavBar userId = {this.state.userId} logout = {this.logout}></NavBar>} */}
+            <NavBar userId = {this.state.userId} logout = {this.logout}></NavBar>
             <Switch>
               <Confirmation path ="/confirmation/:token"></Confirmation>
               <Route
@@ -153,7 +161,7 @@ class App extends Component {
               <Route
                 exact path="/leaderboard"
                 render={() => {
-                  return <Leaderboard />;
+                  return <Leaderboard  leaderboard = {this.state.leaderboard}/>;
                 }}
               />
               <Route

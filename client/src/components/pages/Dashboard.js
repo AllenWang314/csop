@@ -6,7 +6,7 @@ import { socket } from "../../client-socket.js";
 
 class Dashboard extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     // Initialize Default State
     this.state = {};
   }

@@ -112,6 +112,17 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
+router.post("/leaderboard", auth.ensureLoggedIn, (req,res) => {
+  User.find({}).then((users) => {
+    users.sort((a, b) => {
+      if (a.rating > b.rating) {
+        return -1
+      }
+      return 1
+    })
+    res.send({leaderboard: users.slice(0, 10)})
+  })
+})
 router.post("/queue", auth.ensureLoggedIn, queue.queue);
 router.post("/dequeue", auth.ensureLoggedIn, queue.dequeue);
 router.post("/getGame", auth.ensureLoggedIn, queue.getGame);

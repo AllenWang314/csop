@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema({
     default: "",
   },
   resumeLink: String,
+  rating: {
+    type: Number,
+    default: 1000,
+  }
 });
 
 // compile model from schema
