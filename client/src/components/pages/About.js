@@ -19,9 +19,7 @@ class About extends Component {
     console.log("Loaded about")
     return (
       <div className="content-container">
-        <div className="Content">
           <h1 className="Title">FAQs</h1>
-        </div>
           <div id="faq-container">
             <div className="collapsible-container">
               <Collapsible
