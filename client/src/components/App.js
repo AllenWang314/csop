@@ -131,6 +131,10 @@ class App extends Component {
     });
   };
 
+  uploadFile = () => {
+    console.log("this supposedly uploads a file")
+  }
+
   render() {
     console.log(this.state)
     return (
@@ -193,6 +197,7 @@ class App extends Component {
                     logout={this.logout}
                     me={this.me}
                     signup={this.signup}
+                    uploadFile={this.uploadFile}
                     loginMessage={this.state.loginMessage}
                     signUpMessage={this.state.signUpMessage}
                   />;
