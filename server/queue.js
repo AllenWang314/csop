@@ -16,21 +16,21 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const game = require("./models/game");
 
-async function queue(req,res) {
+async function queue(req, res) {
     console.log(req.user._id)
-    Game.findOne({status: "inQueue"}).then((game) => {
-        if(!game) {
+    Game.findOne({ status: "inQueue" }).then((game) => {
+        if (!game) {
             let newGame = new Game({
                 timestamp: Date.now(),
                 userIds: [req.user._id],
                 status: "inQueue",
             })
-            newGame.save().then((newGameMongo)=> {
-                User.findById(req.user._id).then((user)=> {
+            newGame.save().then((newGameMongo) => {
+                User.findById(req.user._id).then((user) => {
                     user.gameId = newGameMongo._id
-                    user.save().then(()=> {
+                    user.save().then(() => {
                         socket.getSocketFromUserID(req.user._id).join("Game: " + newGameMongo._id);
-                        res.send({game:newGameMongo})
+                        res.send({ game: newGameMongo })
                     })
                 })
             })
@@ -43,15 +43,15 @@ async function queue(req,res) {
                 game.status = "inGame"
             }
             game.save().then(() => {
-                User.findById(req.user._id).then((user)=> {
+                User.findById(req.user._id).then((user) => {
                     user.gameId = game._id
-                    user.save().then(()=> {
-                        socket.getSocketFromUserID(req.user._id).to("Game: " + game._id).emit("userQueued", {game: game, user:req.user})
-                        if(game.status === "inGame") {
-                            socket.getSocketFromUserID(req.user._id).to("Game: " + game._id).emit("gameStart", {game: game})
+                    user.save().then(() => {
+                        socket.getSocketFromUserID(req.user._id).to("Game: " + game._id).emit("userQueued", { game: game, user: req.user })
+                        if (game.status === "inGame") {
+                            socket.getSocketFromUserID(req.user._id).to("Game: " + game._id).emit("gameStart", { game: game })
                         }
                         socket.getSocketFromUserID(req.user._id).join("Game: " + game._id)
-                        res.send({game:game})
+                        res.send({ game: game })
                     })
                 })
             });
@@ -59,27 +59,27 @@ async function queue(req,res) {
     })
 }
 
-async function dequeue(req,res) {
-    Game.findById(req.body.gameId).then((game)=> {
+async function dequeue(req, res) {
+    Game.findById(req.body.gameId).then((game) => {
         game.userIds = game.userIds.filter((userId) => {
             return userId !== req.user._id
         })
-        game.save().then(()=> {
-            User.findById(req.user._id).then((user)=> {
+        game.save().then(() => {
+            User.findById(req.user._id).then((user) => {
                 user.gameId = ""
-                user.save().then(()=> {
+                user.save().then(() => {
                     socket.getSocketFromUserID(req.user._id).leave("Game: " + game._id);
-                    socket.getSocketFromUserID(req.user._id).to("Game: " + game._id).emit("userLeft", {game: game, user:req.user})
-                    res.send({game:game})
+                    socket.getSocketFromUserID(req.user._id).to("Game: " + game._id).emit("userLeft", { game: game, user: req.user })
+                    res.send({ game: game })
                 })
             })
         })
     })
 }
 
-async function getGame(req,res) {
-    Game.findById(req.user.gameId).then((game)=> {
-        res.send({game:game})
+async function getGame(req, res) {
+    Game.findById(req.user.gameId).then((game) => {
+        res.send({ game: game })
     })
 }
 

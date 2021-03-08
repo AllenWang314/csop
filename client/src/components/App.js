@@ -11,16 +11,10 @@ import { get, post } from "../utilities";
 import { socket } from "../client-socket.js";
 import NotFound from "./pages/NotFound.js";
 import Confirmation from "./pages/Confirmation.js";
-import Login from "./pages/Login.js"
 import About from "./pages/About.js"
 import Contact from "./pages/Contact.js"
 import Splash from "./pages/Splash.js"
-import Leaderboard from "./pages/Leaderboard.js"
-import Dashboard from "./pages/Dashboard.js"
-import Signup from "./pages/Signup.js"
 import NavBar from "./modules/NavBar/NavBar.js"
-import PasswordReset from "./pages/PasswordReset.js"
-import PasswordEmail from "./pages/PasswordEmail.js"
 
 
 
@@ -52,14 +46,10 @@ class App extends Component {
         // they are registed in the database, and currently logged in.
         this.me();
       } else {
-        this.setState({loaded: true})
+        this.setState({ loaded: true })
       }
     });
 
-    post("/api/leaderboard", {}).then((data) => {
-      this.setState({leaderboard: data.leaderboard})
-    })
-    
     socket.on("reconnect_failed", () => {
       this.setState({ disconnect: true });
     });
@@ -70,149 +60,41 @@ class App extends Component {
     });
   }
 
-  login = (data) => {
-    post("/api/login", data).then((res) => {
-      cookies.set("token", res.token, { path: "/" });
-      if (res.msg) {
-        this.setState({ loginMessage: res.msg });
-      }
-      if (res.token) {
-        this.setState({ loginMessage: "Success!" });
-      }
-      post("/api/initsocket", { socketid: socket.id }).then((data) => {
-        if (data.init) {
-          this.me()
-        }
-        else {
-          this.setState({
-            disconnect: true,
-          });
-        }
-      });
-    });
-  };
-
-  logout = () => {
-    cookies.set("token", "", { path: "/" });
-    post("/api/logout", {}).then((res) => {
-      this.setState({ userId: undefined }, () => {
-        window.location.href = "/";
-      });
-    });
-  };
-
-  me = () => {
-    let token = cookies.get("token");
-    get("/api/me", {}, token).then((res) => {
-      if (!res.user) {
-        this.logout();
-        return;
-      }
-      this.setState({
-        userId: res.user._id,
-        schoolId: res.user.schoolId,
-        name: res.user.name,
-        loungeId: res.user.loungeId,
-        pageIds: res.user.pageIds,
-        isSiteAdmin: res.user.isSiteAdmin,
-        email: res.user.email,
-        visible: res.user.visible,
-        allPages: res.allPages,
-        loaded: true,
-      });
-    });
-  };
-
-  signup = (data) => {
-    post("/api/signup", data).then((res) => {
-      if (res.msg) {
-        this.setState({ signUpMessage: res.msg });
-      }
-    });
-  };
-
   render() {
-    console.log(this.state)
     return (
-        <BrowserRouter>
-          <div>
-            {/* {window.location.href.indexOf("/login") >=0 || window.location.href.indexOf("/signup") >= 0 ? <></> : <NavBar userId = {this.state.userId} logout = {this.logout}></NavBar>} */}
-            <NavBar userId = {this.state.userId} logout = {this.logout}></NavBar>
-            <Switch>
-              <Confirmation path ="/confirmation/:token"></Confirmation>
-              <Route
-                exact path="/about"
-                render={() => {
-                  return <About loggedIn={this.state.userId}/>;
-                }}
-              />
-              <Route
-                exact path="/test"
-                render={() => {
-                  return <NavBar />;
-                }}
-              />
-              <Route
-                exact path="/contact"
-                render={() => {
-                  return <Contact />;
-                }}
-              />
-              <Route
-                exact path="/leaderboard"
-                render={() => {
-                  return <Leaderboard  leaderboard = {this.state.leaderboard}/>;
-                }}
-              />
-              <Route
-                exact path="/dashboard"
-                render={() => {
-                  return <Dashboard />;
-                }}
-              />
-              <Route
-                exact path="/login"
-                render={() => {
-                  return <Login
-                    visible={true}
-                    login={this.login}
-                    logout={this.logout}
-                    me={this.me}
-                    signup={this.signup}
-                    loginMessage={this.state.loginMessage}
-                    signUpMessage={this.state.signUpMessage}
-                  />;
-                }}
-              />
-              <Route
-                exact path="/signup"
-                render={() => {
-                  return <Signup
-                    visible={true}
-                    login={this.login}
-                    logout={this.logout}
-                    me={this.me}
-                    signup={this.signup}
-                    loginMessage={this.state.loginMessage}
-                    signUpMessage={this.state.signUpMessage}
-                  />;
-                }}
-              />
-              <PasswordEmail path ="/passwordemail"></PasswordEmail>
-              <PasswordReset path ="/passwordreset/:token"></PasswordReset>
-              <Route
-                exact path="/"
-                render={() => {
-                  return <Splash />
-                }}
-              />
-              <Route path='*' exact={true} render={() => {
-                return <NotFound default />;
-              }} />
-            </Switch>
-            <button onClick = {()=>{console.log(this.state)}}>log me</button>
-          </div>
-        </BrowserRouter>
+      <BrowserRouter>
+        <div>
+          <NavBar></NavBar>
+          <Switch>
+            <Confirmation path="/confirmation/:token"></Confirmation>
+            <Route
+              exact path="/about"
+              render={() => {
+                return <About loggedIn={this.state.userId} />;
+              }}
+            />
+
+            <Route
+              exact path="/contact"
+              render={() => {
+                return <Contact />;
+              }}
+            />
+
+
+            <Route
+              exact path="/"
+              render={() => {
+                return <Splash />
+              }}
+            />
+            <Route path='*' exact={true} render={() => {
+              return <NotFound default />;
+            }} />
+          </Switch>
+          <button onClick={() => { console.log(this.state) }}>log me</button>
+        </div>
+      </BrowserRouter>
     );
   }
 }

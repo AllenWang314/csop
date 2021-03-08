@@ -21,22 +21,19 @@ class Splash extends Component {
   }
 
   render() {
-    console.log("Loaded splash")
     return (
       <div>
         <NavBar />
         <div className="content-container">
           <div className="Content">
-            <img className="MiniChips" src={miniChips}/>
+            <img className="MiniChips" src={miniChips} />
             <h1 className="Title">Collegiate Series of Poker</h1>
-            <p className="TagLine">Climb the Ranks.</p>
-            <NavLink to="/dashboard">
-              <button className="Play">Play Now</button>
-            </NavLink>
+            <p className="TagLine">Climb the Ranks. Win 10k in prizes</p>
+            <a className="Play" href="https://docs.google.com/forms/d/e/1FAIpQLSd_ir05nZz_Ztc_SeXoDDj1l4RmN0-9wbxgARsDbokrtfbsyQ/viewform?usp=sf_link" target="_blank" >Sign Up</a>
           </div>
-          <img className="LeftChipLight" src={leftChip}/>
-          <img className="LeftChipDark" src={leftChipDark}/>
-          <img className="BigChip" src={bigChip}/>
+          <img className="LeftChipLight" src={leftChip} />
+          <img className="LeftChipDark" src={leftChipDark} />
+          <img className="BigChip" src={bigChip} />
 
           <div className="PageTwo">
             <div className="PageTwoContainer">
@@ -46,9 +43,9 @@ class Splash extends Component {
                 <p>Do you have what it takes?</p>
               </div>
               <div className="Season">
-                <img className="Trophy" src={trophy}/>
+                <img className="Trophy" src={trophy} />
                 <p>Season 1</p>
-                <p>Fall 2020 - Spring 2021</p>
+                <p>Spring 2021</p>
               </div>
               <NavLink to="/about">
                 <button className="Info">More Info</button>
