@@ -92,7 +92,6 @@ class App extends Component {
               return <NotFound default />;
             }} />
           </Switch>
-          <button onClick={() => { console.log(this.state) }}>log me</button>
         </div>
       </BrowserRouter>
     );
