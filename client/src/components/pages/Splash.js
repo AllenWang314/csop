@@ -39,7 +39,7 @@ class Splash extends Component {
             <div className="PageTwoContainer">
               <div className="Welcome">
                 <h1 className="WelcomeCSOP">Welcome to CSOP!</h1>
-                <p>We create a collegiate scene for poker just like any other sport. College students nation-wide can climb the ranks every season and be invited to a National Finals Tournament, where they can compete for the ultimate title!</p>
+                <p>We create a collegiate scene for poker just like any other sport. College students nation-wide can climb the ranks every season and be invited to a National Finals Tournament, where they can compete for the ultimate title! This year, we will be only be hosting a virtual final tournament happening on May 8th open to all undergraduates.</p>
                 <p>Do you have what it takes?</p>
               </div>
               <div className="Season">

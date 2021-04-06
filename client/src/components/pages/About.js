@@ -22,7 +22,7 @@ class About extends Component {
         <div id="faq-container">
           <div className="collapsible-container">
             <Collapsible
-              trigger={<div className="faq-trigger">What is CSOP?</div>}
+              trigger={<p className="faq-trigger">What is CSOP?</p>}
               openedClassName="faq-active"
               triggerClassName="faq-title"
               triggerOpenedClassName="faq-title-active"
@@ -40,7 +40,7 @@ class About extends Component {
           <div className="collapsible-container">
 
             <Collapsible
-              trigger={<div className="faq-trigger">When is CSOP?</div>}
+              trigger={<p className="faq-trigger">When is CSOP?</p>}
               openedClassName="faq-active"
               triggerClassName="faq-title"
               triggerOpenedClassName="faq-title-active"
@@ -54,34 +54,34 @@ class About extends Component {
           </div>
           <div className="collapsible-container">
             <Collapsible
-              trigger={<div className="faq-trigger">How do players qualify for the tournament?</div>}
+              trigger={<p className="faq-trigger">How do players qualify for the tournament?</p>}
               openedClassName="faq-active"
               triggerClassName="faq-title"
               triggerOpenedClassName="faq-title-active"
               contentInnerClassName="faq-content">
               <p className="faq-answer">
-                Interested college students who want to participate should apply <a href="https://docs.google.com/forms/d/e/1FAIpQLSd_ir05nZz_Ztc_SeXoDDj1l4RmN0-9wbxgARsDbokrtfbsyQ/viewform?usp=sf_link">here</a>.
+                Future years will have qualifications for our final tournament. For our first year, interested college students who want to participate in the final tournament on May 8th should apply <a href="https://docs.google.com/forms/d/e/1FAIpQLSd_ir05nZz_Ztc_SeXoDDj1l4RmN0-9wbxgARsDbokrtfbsyQ/viewform?usp=sf_link">here</a>.
                 Players who are accepted should expect to receive an email by April 24th with details on how to participate.
               </p>
             </Collapsible>
           </div>
           <div className="collapsible-container">
             <Collapsible
-              trigger={<div className="faq-trigger">How do I win prizes?</div>}
+              trigger={<p className="faq-trigger">How do I win prizes?</p>}
               openedClassName="faq-active"
               triggerClassName="faq-title"
               triggerOpenedClassName="faq-title-active"
               contentInnerClassName="faq-content">
               <p className="faq-answer">
-                The top finishers from the tournament will each receive cash prizes, totaling in 10k.
-                A prize payout structure can be found <a href="/structure">here</a>. 
-                In addition, all participants will have food provided and receive swag from our <a href="/sponsors">sponsors</a>.
+                The top finishers from the tournament will each receive cash prizes, totaling in 10k!
+                A prize payout structure will be posted on our website at a later date. 
+                In addition, all participants will have food provided and receive free swag from our <a href="/sponsors">sponsors</a>.
               </p>
             </Collapsible>
           </div>
           <div className="collapsible-container">
             <Collapsible
-              trigger={<div className="faq-trigger">How can I help organize CSOP?</div>}
+              trigger={<p className="faq-trigger">How can I help organize CSOP?</p>}
               openedClassName="faq-active"
               triggerClassName="faq-title"
               triggerOpenedClassName="faq-title-active"

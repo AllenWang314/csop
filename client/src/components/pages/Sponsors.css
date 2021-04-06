@@ -1,0 +1,29 @@
+.sponsor-content {
+    padding-right: 8vw;
+    padding-left: 8vw;
+    margin: 10px;
+    padding-bottom:8vw;
+}
+/* font-family: Cairo;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 45px;
+margin-top: 36px;
+
+color: #FFFFFF; */
+
+h2 {
+    padding-top:2vw;
+    font-family: 'Cairo', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.sponsor-p {
+    font-family: Cairo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    margin-top: 36px;
+}

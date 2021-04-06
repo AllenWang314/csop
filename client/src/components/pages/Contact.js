@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Pages.css";
-import "./Splash.css";
+import "./Contact.css";
 
 class Contact extends Component {
   constructor(props) {
@@ -19,9 +19,9 @@ class Contact extends Component {
       <div className = "content-container">
         <div className="Content">
           <h1 className="Title">Contact</h1>
-          <div className="placeholder">
+          <p className="contact-body">
             Please email <a href="mailto:official.csop@gmail.com">official.csop@gmail.com</a> for inquries regarding logistics, registration, or sponsorships. We typically respond within 24 hours and are always happy to answer any questions that you may have!
-          </div>
+          </p>
         </div>
       </div>
     );
