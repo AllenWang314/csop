@@ -28,7 +28,7 @@ class Splash extends Component {
           <div className="Content">
             <img className="MiniChips" src={miniChips} />
             <h1 className="Title">Collegiate Series of Poker</h1>
-            <p className="TagLine">Climb the Ranks. Win 10k in prizes</p>
+            <p className="TagLine">Climb the Ranks. Get Swag. Win 10k in prizes.</p>
             <a className="Play" href="https://docs.google.com/forms/d/e/1FAIpQLSd_ir05nZz_Ztc_SeXoDDj1l4RmN0-9wbxgARsDbokrtfbsyQ/viewform?usp=sf_link" target="_blank" >Sign Up</a>
           </div>
           <img className="LeftChipLight" src={leftChip} />

@@ -74,8 +74,20 @@ class About extends Component {
               contentInnerClassName="faq-content">
               <p className="faq-answer">
                 The top finishers from the tournament will each receive cash prizes, totaling in 10k.
-                A prize payout structure can be found <a href="/structure">here</a>
+                A prize payout structure can be found <a href="/structure">here</a>. 
                 In addition, all participants will have food provided and receive swag from our <a href="/sponsors">sponsors</a>.
+              </p>
+            </Collapsible>
+          </div>
+          <div className="collapsible-container">
+            <Collapsible
+              trigger={<div className="faq-trigger">How can I help organize CSOP?</div>}
+              openedClassName="faq-active"
+              triggerClassName="faq-title"
+              triggerOpenedClassName="faq-title-active"
+              contentInnerClassName="faq-content">
+              <p className="faq-answer">
+                If you're interested in joining our team or becoming a campus representative, please contact us at <a href="mailto:official.csop@gmail.com">official.csop@gmail.com</a>.
               </p>
             </Collapsible>
           </div>
