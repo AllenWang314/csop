@@ -13,6 +13,8 @@ import NotFound from "./pages/NotFound.js";
 import Confirmation from "./pages/Confirmation.js";
 import About from "./pages/About.js"
 import Contact from "./pages/Contact.js"
+import Structure from "./pages/Structure.js"
+import Sponsors from "./pages/Sponsors.js"
 import Splash from "./pages/Splash.js"
 import NavBar from "./modules/NavBar/NavBar.js"
 
@@ -80,8 +82,18 @@ class App extends Component {
                 return <Contact />;
               }}
             />
-
-
+            <Route
+              exact path="/structure"
+              render={() => {
+                return <Structure />;
+              }}
+            />
+            <Route
+              exact path="/sponsors"
+              render={() => {
+                return <Sponsors />;
+              }}
+            />
             <Route
               exact path="/"
               render={() => {
