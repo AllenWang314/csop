@@ -1,3 +1,19 @@
+.Title {
+    font-family: Cairo;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    margin-top: 96px;
+    margin-bottom: 5px;
+    padding-top: 96px;
+    padding-bottom: 12px;
+
+    color: #000000;
+    text-align: center;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .contact-body {
     padding-right: 8vw;
     padding-left: 8vw;
@@ -8,11 +24,11 @@
     font-size: 24px;
 }
 
-/* font-family: Cairo;
-font-style: normal;
-font-weight: normal;
-font-size: 24px;
-line-height: 45px;
-margin-top: 36px;
-
-color: #FFFFFF; */
+/* adjustments for phones */
+@media only screen and (max-device-width: 500px){
+    .Title {
+        margin-top: 20vw;
+        padding-top:20vw;
+        font-size: 20vw;
+    }
+}

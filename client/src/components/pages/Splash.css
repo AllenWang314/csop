@@ -109,7 +109,7 @@
 
 .Welcome, .Season {
     flex: 0 0 40%;
-    margin: 0px 2vw;
+    margin: 0px 4vw;
 }
 
 .Welcome h1 {
@@ -137,7 +137,7 @@
 
 .Info {
     flex: 0 0 100%;
-    margin-top: 5px;
+    margin-top: 3vw;
 }
 
 .Season {
@@ -170,28 +170,34 @@
 /* hiding chips for smaller screens */
 @media only screen and (max-width: 560px){
     .LeftChipLight {
-        visibility: hidden;
+        display: none;
     }
     .LeftChipDark {
-        visibility: hidden;
+        display: none;
     }
     .BigChip {
-        visibility: hidden;
+        display: none;
     }
     .Season {
-        visibility:hidden;
+        display:none;
     }
 }
 
 /* hiding chips for phones */
 @media only screen and (max-device-width: 500px){
     .LeftChipLight {
-        visibility: hidden;
+        display: none;
     }
     .LeftChipDark {
-        visibility: hidden;
+        display: none;
     }
     .BigChip {
-        visibility: hidden;
+        display: none;
+    }
+    .PageTwo {
+        top:70%;
+    }
+    .Welcome h1 {
+        padding-top: 2vw;
     }
 }

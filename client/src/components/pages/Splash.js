@@ -30,10 +30,10 @@ class Splash extends Component {
             <h1 className="Title">Collegiate Series of Poker</h1>
             <p className="TagLine">Climb the Ranks. Get Swag. Win 10k in prizes.</p>
             <a className="Play" href="https://docs.google.com/forms/d/e/1FAIpQLSd_ir05nZz_Ztc_SeXoDDj1l4RmN0-9wbxgARsDbokrtfbsyQ/viewform?usp=sf_link" target="_blank" >Sign Up</a>
+            <img className="LeftChipLight" src={leftChip} />
+            <img className="LeftChipDark" src={leftChipDark} />
+            <img className="BigChip" src={bigChip} />
           </div>
-          <img className="LeftChipLight" src={leftChip} />
-          <img className="LeftChipDark" src={leftChipDark} />
-          <img className="BigChip" src={bigChip} />
 
           <div className="PageTwo">
             <div className="PageTwoContainer">

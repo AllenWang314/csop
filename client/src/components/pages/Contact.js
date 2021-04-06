@@ -17,12 +17,10 @@ class Contact extends Component {
     console.log("Loaded dashboard")
     return (
       <div className = "content-container">
-        <div className="Content">
           <h1 className="Title">Contact</h1>
           <p className="contact-body">
             Please email <a href="mailto:official.csop@gmail.com">official.csop@gmail.com</a> for inquries regarding logistics, registration, or sponsorships. We typically respond within 24 hours and are always happy to answer any questions that you may have!
           </p>
-        </div>
       </div>
     );
   }
