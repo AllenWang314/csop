@@ -34,10 +34,10 @@ class App extends Component {
       userId: undefined,
       loaded: false // TODO: figure out a better way to handle loaded and rendering the login button
     };
-    let self = this;
-    if (cookies.get("token") != undefined && cookies.get("token").length > 0) {
-      self.me();
-    }
+    // let self = this;
+    // if (cookies.get("token") != undefined && cookies.get("token").length > 0) {
+    //   // self.me();
+    // }
   }
 
   componentDidMount() {
