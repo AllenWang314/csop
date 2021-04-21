@@ -61,7 +61,7 @@ class About extends Component {
               contentInnerClassName="faq-content">
               <p className="faq-answer">
                 Future years will have qualifications for our final tournament. For our first year, interested college students who want to participate in the final tournament on May 8th should apply <a href="https://docs.google.com/forms/d/e/1FAIpQLSd_ir05nZz_Ztc_SeXoDDj1l4RmN0-9wbxgARsDbokrtfbsyQ/viewform?usp=sf_link">here</a>.
-                Players who are accepted should expect to receive an email by April 24th with details on how to participate.
+                Players who are accepted should expect to receive an email by May 1st with details on how to participate.
               </p>
             </Collapsible>
           </div>
@@ -87,7 +87,7 @@ class About extends Component {
               triggerOpenedClassName="faq-title-active"
               contentInnerClassName="faq-content">
               <p className="faq-answer">
-                If you're interested in joining our team or becoming a campus representative, please contact us at <a href="mailto:official.csop@gmail.com">official.csop@gmail.com</a>.
+                If you're interested in joining our team or becoming a campus representative, please contact us at <a href="mailto:official.csop@gmail.com">official.csop@gmail.com</a>. Campus representatives help publicize CSOP to their college campuses and get exclusive swag, auto-admission to CSOP, and resume priority.
               </p>
             </Collapsible>
           </div>
