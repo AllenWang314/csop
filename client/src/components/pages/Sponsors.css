@@ -27,3 +27,20 @@ h2 {
     font-size: 20px;
     margin-top: 36px;
 }
+
+#sponsor-logos {
+    display: flex;
+    flex-direction: horizontal;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.item {
+    margin-top: 1vw;
+    padding: 0vw 5vw;
+}
+
+.logo {
+    width: 30vw;
+}

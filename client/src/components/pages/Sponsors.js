@@ -3,6 +3,11 @@ import React, { Component } from "react";
 import "./Pages.css";
 import "./Sponsors.css";
 
+import JaneStreet from "./jane_street.png";
+import SIG from "./sig.png";
+import OldMissionCapital from "./old_mission_capital.png";
+import FlowTraders from "./flow_traders.png";
+
 class Sponsors extends Component {
     constructor(props) {
         super(props);
@@ -19,6 +24,17 @@ class Sponsors extends Component {
             <div className="content-container">
                 <h1 className="Title">Sponsors</h1>
                 <div className="sponsor-content">
+
+                <h2>2021 Sponsors</h2>
+                <p className="sponsor-p">Thanks to our sponsors of the 2021 Collegiate Series of Poker!
+                    <div id="sponsor-logos">
+                        <a className="item" href="https://www.janestreet.com/" target="_blank"><img src = {JaneStreet} className = "logo"/></a>
+                        <a className="item" href="https://sig.com/" target="_blank"><img src = {SIG} className = "logo"/></a>
+                        <a classnName="item" href="https://www.oldmissioncapital.com/" target="_blank"><img src = {OldMissionCapital} className = "logo"/></a>
+                        <a className="item" href="https://www.flowtraders.com/" target="_blank"><img src = {FlowTraders} className = "logo"/></a>
+                    </div>
+                </p>
+
                 <h2>Our Mission</h2>
                 <p className="sponsor-p">CSOP's core mission is to bring together the poker communities across our nation's colleges and kindle a passion for learning mathematical and analytical skills at the core of poker and trading. In recent years, poker clubs have gained significant traction in several colleges across the United States. At an attempt to connect these communities, we created CSOP, the beginning of a national unified collegiate poker organization.
 
