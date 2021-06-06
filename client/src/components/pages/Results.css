@@ -52,6 +52,10 @@ td {
     align-content: center;
 }
 
+table {
+    margin-bottom: 4vw;
+}
+
 /* adjustments for phones */
 @media only screen and (max-device-width: 500px){
     .Title {
