@@ -16,6 +16,7 @@ import Contact from "./pages/Contact.js"
 import Format from "./pages/Format.js"
 import Sponsors from "./pages/Sponsors.js"
 import Splash from "./pages/Splash.js"
+import Results from "./pages/Results.js"
 import NavBar from "./modules/NavBar/NavBar.js"
 
 
@@ -86,6 +87,12 @@ class App extends Component {
               exact path="/format"
               render={() => {
                 return <Format />;
+              }}
+            />
+            <Route
+              exact path="/results"
+              render={() => {
+                return <Results />;
               }}
             />
             <Route
